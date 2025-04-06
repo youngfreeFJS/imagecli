@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Imagecli"  width="260" src="static/logo.png">
+  <img alt="Imagecli"  width="260" src="https://github.com/youngfreeFJS/imagecli/blob/main/static/logo.png">
 </p>
 
 
