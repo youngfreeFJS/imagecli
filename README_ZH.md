@@ -64,3 +64,22 @@ img background -f '/Users/youngfreefjs/Desktop/code/github/imagecli/static/passp
 | Original Photo        | RED Background Photo         | WHITE Background Photo        |
 |-----------------------|------------------------------|-------------------------------|
 | <img src="./static/passport_photo_blue.png" alt="Original Photo" width="100"/> | <img src="./static/background_RED_passport_photo_blue.png" alt="RED Background Photo" width="100"/> | <img src="./static/background_WHITE_passport_photo_blue.png" alt="WHITE Background Photo" width="100"/> |
+
+
+### 5. 合并截图为长图
+> Code by: my former company [`@Meituan-Dianping`](https://github.com/Meituan-Dianping/vision-ui/blob/master/resources/vision_merge.md)
+
+
+> 请保障前面一张截图后，向上滚动1/3再截图第二张图  
+你可以手工操作截图（从屏幕高度2/3，向上滑动至1/3）  
+或者通过UI自动化截图，屏幕高度2/3 to 1/3
+
+```bash
+img merge -i '/Users/youngfreefjs/Desktop/code/github/imagecli/static/image_merge/taobaoPage1.JPG' -i '/Users/youngfreefjs/Desktop/code/github/imagecli/static/image_merge/taobaoPage2.JPG' -i '/Users/youngfreefjs/Desktop/code/github/imagecli/static/image_merge/taobaoPage3.JPG' -o '/Users/youngfreefjs/Desktop/code/github/imagecli/static/image_merge/merged.png'
+
+
+>> Merged image saved to: /Users/youngfreefjs/Desktop/code/github/imagecli/static/image_merge/merged.png
+```
+| Original Images        | Page1 Images        | Page2 Images        | Page3 Image         |
+|-----------------------|-----------------------|-----------------------|-----------------------|
+| <img src="./static/image_merge/merged.png" alt="Merged Image" width="100"/> | <img src="./static/image_merge/taobaoPage1.JPG" alt="Original Photo" width="100"/> |<img src="./static/image_merge/taobaoPage2.JPG" alt="Original Photo" width="100"/> | <img src="./static/image_merge/taobaoPage3.JPG" alt="Original Photo" width="100"/> |

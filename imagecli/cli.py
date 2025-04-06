@@ -2,6 +2,8 @@
 
 import click
 from imagecli.image import ImageCli, ImageSize
+from imagecli.siticher import ImageStitcher
+
 
 @click.group()
 def main():
@@ -58,20 +60,25 @@ def turn(file, direction, angle):
     modified_image_path = image_cli.turn(direction=direction, angle=angle)
     click.echo(f"Turn file {direction} {angle} degrees, saved to: {modified_image_path}")
 
-
 @main.command()
-@click.option('-f', '--file', required=True, type=click.Path(exists=True), help='Path to the image file.')
-@click.option('-t', '--text', required=True, type=str, help='Text to use as the watermark.')
-@click.option('-p', '--position', default='bottomright', type=click.Choice(['topleft', 'topright', 'bottomleft', 'bottomright', 'center'], case_sensitive=False), help='Position to place the watermark. Default is bottomright.')
-@click.option('--padding', default=50, type=int, help='Padding in pixels around the watermark. Default is 50.')
-@click.option('--font-size', default=100, type=int, help='Font size for the watermark text. Default is 100.')
-def watermark(file, text, position, padding, font_size):
-    """Add a text watermark to the image."""
-    image_cli = ImageCli(file)
-    watermarked_image_path = image_cli.add_watermark(
-        text=text,
-    )
-    click.echo(f"Added text watermark '{text}' to image, saved to: {watermarked_image_path}")
+@click.option('-i', '--input-paths', required=True, multiple=True, type=click.Path(exists=True),
+              help='Paths to the image files to be stitched. Provide each path separately with `-i`.')
+@click.option('-o', '--output-path', required=True, type=click.Path(),
+              help='Path where the stitched image will be saved.')
+@click.option('--padding-width', default=80, type=int,
+              help='Width of padding to be added around images. Default is 80.')
+@click.option('--remove-padding/--keep-padding', default=False,
+              help='Specify whether to remove the padding from the final result.')
+def merge(input_paths, output_path, padding_width, remove_padding):
+    """Stitch images together using specified parameters."""
+    print(f'input_paths: {input_paths}, output_path: {output_path}, padding_width: {padding_width}, remove_padding: {remove_padding}')
+    
+    stitcher = ImageStitcher(input_paths, padding_width)
+    try:
+        merged_image_path = stitcher.stitch_images(output_path, True)
+        click.echo(f"Merged image saved to: {merged_image_path}")
+    except IOError as e:
+        click.echo(f"Error during stitching: {e}", err=True)
 
 if __name__ == '__main__':
     main()

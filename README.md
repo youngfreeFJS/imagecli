@@ -67,3 +67,23 @@ img background -f '/Users/youngfreefjs/Desktop/code/github/imagecli/static/passp
 | Original Background Photo        | RED Background Photo         | WHITE Background Photo        |
 |-----------------------|------------------------------|-------------------------------|
 | <img src="./static/passport_photo_blue.png" alt="Original Photo" width="100"/> | <img src="./static/background_RED_passport_photo_blue.png" alt="RED Background Photo" width="100"/> | <img src="./static/background_WHITE_passport_photo_blue.png" alt="WHITE Background Photo" width="100"/> |
+
+
+
+### 5. Merge images to a long image
+> Code by: my former company [`@Meituan-Dianping`](https://github.com/Meituan-Dianping/vision-ui/blob/master/resources/vision_merge.md)
+
+
+> Please ensure that after taking the first screenshot, scroll 1/3 before taking the second screenshot.
+You can manually take screenshots (slide up from 2/3 of the screen height to 1/3)
+Alternatively, screenshots can be taken through UI automation, with a screen height ranging from 2/3 to 1/3
+
+```bash
+img merge -i '/Users/youngfreefjs/Desktop/code/github/imagecli/static/image_merge/taobaoPage1.JPG' -i '/Users/youngfreefjs/Desktop/code/github/imagecli/static/image_merge/taobaoPage2.JPG' -i '/Users/youngfreefjs/Desktop/code/github/imagecli/static/image_merge/taobaoPage3.JPG' -o '/Users/youngfreefjs/Desktop/code/github/imagecli/static/image_merge/merged.png'
+
+
+>> Merged image saved to: /Users/youngfreefjs/Desktop/code/github/imagecli/static/image_merge/merged.png
+```
+| Original Images        | Page1 Images        | Page2 Images        | Page3 Image         |
+|-----------------------|-----------------------|-----------------------|-----------------------|
+| <img src="./static/image_merge/merged.png" alt="Merged Image" width="100"/> | <img src="./static/image_merge/taobaoPage1.JPG" alt="Original Photo" width="100"/> |<img src="./static/image_merge/taobaoPage2.JPG" alt="Original Photo" width="100"/> | <img src="./static/image_merge/taobaoPage3.JPG" alt="Original Photo" width="100"/> |
