@@ -10,7 +10,7 @@ def read_requirements(name):
 
 setup(
     name='open-image-cli',
-    version='0.1',
+    version='0.1.1',
     packages=find_packages(),
     install_requires=read_requirements('requirements.txt'),
     entry_points={
