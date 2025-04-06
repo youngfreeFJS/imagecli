@@ -19,6 +19,12 @@
 ## Overview
 ImageCli is a simple command-line interface designed to effectively handle image operations, allowing users to perform basic tasks through simple descriptive commands (without the need to understand complex tool design, speak freely)
 
+
+## Download
+```shell 
+pip install open-image-cli
+`````
+
 ## Examples
 
 ### 1. Image size
