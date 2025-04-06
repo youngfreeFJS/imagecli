@@ -8,10 +8,17 @@ def read_requirements(name):
         require_str = f.read()
         return require_str.split()
 
+with open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
+
 setup(
     name='open-image-cli',
-    version='0.1.1',
+    version='0.1.2',
+    author='youngfreefjs',
+    url='https://github.com/youngfreeFJS/imagecli',
     packages=find_packages(),
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     install_requires=read_requirements('requirements.txt'),
     entry_points={
         'console_scripts': [
