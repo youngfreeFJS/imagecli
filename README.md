@@ -8,6 +8,14 @@
     A natural language described, out of the box 📷 image command line tools. 🔧
 </div>
 
+
+<div align="center">
+
+[English](./README.md) | [简体中文](./README_ZH.md)
+
+</div>
+
+
 ## Overview
 ImageCli is a simple command-line interface designed to effectively handle image operations, allowing users to perform basic tasks through simple descriptive commands (without the need to understand complex tool design, speak freely)
 
