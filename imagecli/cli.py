@@ -1,9 +1,11 @@
 # imagecli/cli.py
-
+import json
 import click
+from typing import List
 from imagecli.image import ImageCli, ImageSize
 from imagecli.siticher import ImageStitcher
-
+from imagecli.macocr import MacOCR
+from imagecli.element import OCRElement
 
 @click.group()
 def main():
@@ -79,6 +81,15 @@ def merge(input_paths, output_path, padding_width, remove_padding):
         click.echo(f"Merged image saved to: {merged_image_path}")
     except IOError as e:
         click.echo(f"Error during stitching: {e}", err=True)
+
+
+@main.command()
+@click.option('-f', '--file', required=True, type=click.Path(exists=True), help='Image ocr result.')
+def ocr(file):
+    """Image ocr result."""
+    macocr = MacOCR()
+    ocr_elements: List[OCRElement] = macocr.ocr(file)
+    click.echo(json.dumps([OCRElement.to_dict(element) for element in ocr_elements], indent=4, ensure_ascii=False))
 
 if __name__ == '__main__':
     main()

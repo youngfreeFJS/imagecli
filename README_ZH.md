@@ -83,3 +83,29 @@ img merge -i '/Users/youngfreefjs/Desktop/code/github/imagecli/static/image_merg
 | Original Images        | Page1 Images        | Page2 Images        | Page3 Image         |
 |-----------------------|-----------------------|-----------------------|-----------------------|
 | <img src="./static/image_merge/merged.png" alt="Merged Image" width="100"/> | <img src="./static/image_merge/taobaoPage1.JPG" alt="Original Photo" width="100"/> |<img src="./static/image_merge/taobaoPage2.JPG" alt="Original Photo" width="100"/> | <img src="./static/image_merge/taobaoPage3.JPG" alt="Original Photo" width="100"/> |
+
+
+
+### 6. OCR (current version macOS only)
+```bash
+img ocr -f '/Users/youngfreefjs/Desktop/code/github/imagecli/static/image_merge/taobaoPage720P.JPG'
+
+>> [
+      {
+          "content": "19:29",
+          "leftTopX": 42.00000074999997,
+          "leftTopY": 23.999999724999952,
+          "width": 71.5,
+          "height": 22.00000000000003,
+          "tags": {
+              "confidence": 0.5
+          }
+      },
+
+      ...
+  ]
+```
+| Image                                                   | OCR result                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="./static/image_merge/taobaoPage720P.JPG" alt="Merged Image" width="100"/> | ```[{"content":"19:29","leftTopX":42.00000074999997,"leftTopY":23.999999724999952,"width":71.5,"height":22.00000000000003,"tags":{"confidence":0.5}},{"content":"关注","leftTopX":23.999999700000004,"leftTopY":140.00000010000008,"width":48,"height":24.000000000000057,"tags":{"confidence":1}},{"content":"包头鞋","leftTopX":98.00000044999999,"leftTopY":81.99999991250002,"width":72,"height":26.000000000000085,"tags":{"confidence":1}},{"content":"推荐","leftTopX":92.00000025454545,"leftTopY":137.99999990000015,"width":56,"height":30,"tags":{"confidence":1}},{"content":"我的淘宝","leftTopX":499.9375748301192,"leftTopY":1211.7545823228884,"width":62.1248512268066,"height":16.490835189819393,"tags":{"confidence":1}}]```
+ |
