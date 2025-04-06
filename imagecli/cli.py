@@ -39,5 +39,14 @@ def compress(file, target_size, unit):
     click.echo(f"Compressed Image Size: {compressed_size}")
 
 
+@main.command()
+@click.option('-f', '--file', required=True, type=click.Path(exists=True), help='Path to the image file.')
+@click.option('-c', '--color', default='BLUE', type=click.Choice(['BLUE', 'WHITE', 'RED'], case_sensitive=False), help='Background color to change to. Default is BLUE.')
+def background(file, color):
+    """Compress the image to a target file size."""
+    image_cli = ImageCli(file)
+    modified_image_path = image_cli.change_photo_backgroundcolor(color)
+    click.echo(f"Modified image background `{color.lower()}` saved to: {modified_image_path}")
+
 if __name__ == '__main__':
     main()

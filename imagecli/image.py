@@ -1,4 +1,6 @@
 import os
+import cv2
+import numpy as np
 import inspect
 from typing import Union, Literal
 from PIL import Image as PillowImage
@@ -67,7 +69,58 @@ class ImageCli:
 
         return output_file
     
-    
+
+    def change_photo_backgroundcolor(self, color_enum: Union[Literal["BLUE", "WHITE", "RED"]] = "RED") -> str:
+        """
+        Change the background color of a passport photo based on a color enumeration.
+
+        :param color_enum: 'BLUE', 'WHITE', 'RED' for the desired background color
+        :return: Path to the modified image
+        """
+        # Load the image
+        img = cv2.imread(self.local_file)
+        rows, cols, channels = img.shape
+        print(f"Image resolution: {rows}x{cols}, Channels: {channels}")
+        
+        # Convert image to HSV
+        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+        # Detect blueish background (you may need to adjust these values based on the actual image background)
+        lower_blue = np.array([85, 70, 70])
+        upper_blue = np.array([110, 255, 255])
+        mask = cv2.inRange(hsv, lower_blue, upper_blue)
+
+        # Apply dilation and erosion
+        dilate = cv2.dilate(mask, None, iterations=1)
+        erode = cv2.erode(dilate, None, iterations=1)
+
+        # Define the new background color based on enum
+        if color_enum == "BLUE":
+            new_background = (255, 0, 0)  # BGR for blue
+        elif color_enum == "RED":
+            new_background = (0, 0, 255)  # BGR for red
+        elif color_enum == "WHITE":
+            new_background = (255, 255, 255)  # BGR for white
+        else:
+            raise ValueError("Invalid color_enum value. Use 'BLUE', 'RED', or 'WHITE'.")
+
+        # Replace the color
+        for i in range(rows):
+            for j in range(cols):
+                if erode[i, j] == 255:
+                    img[i, j] = new_background
+        
+        # Extract directory and original filename
+        directory, filename = os.path.split(self.local_file)
+        base, extension = os.path.splitext(filename)
+
+        # Save the image with a new name
+        modified_image_path = os.path.join(directory, f"background_{color_enum}_{base}{extension}")
+        cv2.imwrite(modified_image_path, img)
+        
+        return modified_image_path
+
+
     def get_formatted_size(self, unit: Union[Literal["bytes", "KB", "MB", "GB"]] = "bytes") -> str:
         """
         Get the formatted file size in the specified unit.
