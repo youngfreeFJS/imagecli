@@ -9,7 +9,7 @@ def read_requirements(name):
         return require_str.split()
 
 setup(
-    name='imagecli',
+    name='open-image-cli',
     version='0.1',
     packages=find_packages(),
     install_requires=read_requirements('requirements.txt'),
