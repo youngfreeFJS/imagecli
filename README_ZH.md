@@ -5,36 +5,36 @@
 
 <h1 align="center">ImageCli</h1>
 <div align="center">
-    A natural language described, out of the box 📷 image command line tools. 🔧
+    一种开箱即用，使用通用语言描述的 📷 图像命令行工具。🔧
 </div>
 
-## Overview
-ImageCli is a simple command-line interface designed to effectively handle image operations, allowing users to perform basic tasks through simple descriptive commands (without the need to understand complex tool design, speak freely)
+## 概述
+ImageCli是一个简单的命令行界面，旨在有效地处理图像操作，允许用户通过简单的描述性命令执行基本任务（无需理解复杂的工具设计，言出法随🪄）
 
-## Examples
 
-### 1. Image size
+## 示例
+
+### 1. 获取图像像素尺寸
 ```bash
 img size -f '/Users/youngfreefjs/Downloads/logo.png'
 
 >> Image Pixels Size: 1024x1024
 ```
 
-### 2. Image file size
+### 2. 获取图像文件大小
 ```bash
 img file-size -f '/Users/youngfreefjs/Downloads/logo.png'
 
 >> Image File Size: 496470.00 bytes
 ```
-Specify Return Unit  
-You can also specify the output unit for the file size (e.g. bytes, KB, MB):
+设置返回文件大小的单位 (e.g. bytes, KB, MB):
 ```bash
 img file-size -f '/Users/youngfreefjs/Downloads/logo.png' -u MB
 
 >> Image File Size: 0.47 MB
 ```
 
-### 3. Compress image file size
+### 3. 压缩图片
 ```bash
 img compress -f '/Users/youngfreefjs/Downloads/logo.png' -t 0.1 -u MB
 
