@@ -5,7 +5,7 @@ import inspect
 from typing import Union, Literal
 from PIL import Image as PillowImage
 from PIL.ImageFile import ImageFile as PillowImageFile
-
+from PIL import ImageDraw, ImageFont
 class ImageSize:    
     def __init__(self, width: int, height: int):
         self.width = width
@@ -27,7 +27,31 @@ class ImageCli:
     @property
     def file_size(self) -> int:
         return os.path.getsize(self.local_file)
-    
+
+    def turn(self, direction: Union[Literal["LEFT"], Literal["RIGHT"]], angle: int) -> str:        
+        """
+        Rotate the image by a specified angle.
+        :param direction: 'LEFT' or 'RIGHT' for the rotation direction.
+        :param angle: Angle in degrees for the rotation.
+        :return: Path to the rotated image.
+        """
+        if direction not in ["LEFT", "RIGHT"]:
+            raise ValueError("Invalid direction. Use 'LEFT' or 'RIGHT'.")
+        
+        if direction == "LEFT":
+            rotated_image = self.pillow_image_instance.rotate(angle)
+        else:
+            rotated_image = self.pillow_image_instance.rotate(-angle)
+        
+        # Extract directory and original filename
+        directory, filename = os.path.split(self.local_file)
+        base, extension = os.path.splitext(filename)
+        
+        # Save the rotated image with a new name
+        rotated_image_path = os.path.join(directory, f"rotated_{base}{extension}")
+        rotated_image.save(rotated_image_path)
+        
+        return rotated_image_path
 
     def compress_image(self, target_size: float, unit: Union[Literal["MB", "KB", "bytes"]] = "MB") -> str:
         """
