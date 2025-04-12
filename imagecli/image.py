@@ -66,10 +66,10 @@ class ImageCli:
             "KB": 1024,
             "MB": 1024 ** 2
         }
-        
+
         if unit not in conversion_factors:
             raise ValueError(f"Unsupported unit: {unit}. Choose from: {', '.join(conversion_factors.keys())}")
-        
+
         current_size_bytes = self.file_size
         target_size_bytes = target_size * conversion_factors[unit]
 
@@ -79,21 +79,24 @@ class ImageCli:
         # Extract directory and original filename
         directory, filename = os.path.split(self.local_file)
         base, extension = os.path.splitext(filename)
-        
+
         # Construct compressed file path by prepending "compressed_" to base name
         output_file = os.path.join(directory, f"compressed_{base}{extension}")
 
         # Start compression by adjusting quality
         quality = 95
+
+        # Convert image to RGB mode if it's in RGBA before saving
+        rgb_image = self.pillow_image_instance.convert('RGB')
+
         while True:
-            self.pillow_image_instance.convert('RGB')
-            self.pillow_image_instance.save(output_file, format='JPEG', quality=quality)
+            rgb_image.save(output_file, format='JPEG', quality=quality)
             if os.path.getsize(output_file) <= target_size_bytes or quality <= 10:
                 break
             quality -= 5  # Reduce quality and try again
 
         return output_file
-    
+
 
     def change_photo_backgroundcolor(self, color_enum: Union[Literal["BLUE", "WHITE", "RED"]] = "RED") -> str:
         """

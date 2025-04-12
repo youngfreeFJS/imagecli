@@ -13,7 +13,7 @@ with open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='open-image-cli',
-    version='0.5.1',
+    version='0.5.2',
     author='youngfreefjs',
     url='https://github.com/youngfreeFJS/imagecli',
     packages=find_packages(),
