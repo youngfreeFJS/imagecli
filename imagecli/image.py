@@ -86,6 +86,7 @@ class ImageCli:
         # Start compression by adjusting quality
         quality = 95
         while True:
+            self.pillow_image_instance.convert('RGB')
             self.pillow_image_instance.save(output_file, format='JPEG', quality=quality)
             if os.path.getsize(output_file) <= target_size_bytes or quality <= 10:
                 break
